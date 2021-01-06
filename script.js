@@ -5,8 +5,6 @@ $(document).ready(function () {
   var weatherApiKey = "fa71042f3bd6f2175c35473b9ffdf2f4";
 
   function getFiveDaysWeather(obj) {
-    console.log(obj);
-
     var sectionContainer = " ";
     for (let i = 4, j = 0; i < 40; i = i + 8, j++) {
       console.log();
@@ -16,11 +14,12 @@ $(document).ready(function () {
         "https://openweathermap.org/img/w/" +
         obj.list[i].weather[0].icon +
         ".png";
+        tempForecast = Math.floor(1.8 * (obj.list[i].main.temp - 273) + 32)
       let section = `<div  class='cell medium-4 large-2'>
 
     <div id = 'fiveDayContainer'> <h5 id="current-city">  ${date}  </h5>
     <img id = "icon" src ="${iconURL}"> 
-    <p id="temperature"> Temp: ${obj.list[i].main.temp} F </p>
+    <p id="temperature"> Temp: ${tempForecast} F </p>
     <p id="humidity"> Humidity: ${obj.list[i].main.humidity} % </p></div></div>`;
       sectionContainer = sectionContainer + section;
     }
@@ -48,7 +47,7 @@ $(document).ready(function () {
   ) {
 
     return `<h1 id="current-city">${cityName} ( ${todayDate} ) <img id = "imgIcon" src ="${imgURL}"> </h1>  
-<p id="temperature">Temperature: ${cityTemp}</p>
+<p id="temperature">Temperature: ${cityTemp} F </p>
 <p id="humidity">Humidity: ${cityHumid}</p>
 <p id="wind-speed">Wind Speed:${cityWindSpeed} </p>
 <p id="uv-index">UV Index: ${cityUV}</p>`
@@ -62,10 +61,7 @@ $(document).ready(function () {
 
   })
 
-  $("#run-search").on("click", function (event) {
-    
-    event.preventDefault();
-    userInput = $("#city-search").val().trim();
+  function allContent () {
     $("#city-search").empty();
     updateHistoryList();
     displaySearchHistory();
@@ -80,7 +76,7 @@ $(document).ready(function () {
       url: weatherUrlAPI,
       method: "GET",
     }).then(function (response) {
-      console.log(response);
+      
       //updateHistoryList(userInput);
       //displaySearchHistory(cityHistoryList);
 
@@ -129,6 +125,19 @@ $(document).ready(function () {
       //iconURL = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png",
       $("#five-day").append(displayFiveDayWeather);
     });
+  };
+
+  $("#run-search").on("click", function (event) {
+    event.preventDefault();
+    userInput = $("#city-search").val().trim();
+    allContent()
+  });
+
+  $("#search-list").on("click", function () {
+    //event.preventDefault();
+    newInput = $("#inputCity").innerHtml;
+    allContent(newInput)
+    //window.open("index.html", "_self");
   });
 });
 // dateIconURL =
