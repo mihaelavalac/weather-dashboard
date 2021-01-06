@@ -54,10 +54,19 @@ $(document).ready(function () {
 <p id="uv-index">UV Index: ${cityUV}</p>`
     
   }
+  $("#clear-all").on("click", function () {
+    $("#search-list").empty();
+  })
+  
+  $("inputCity").on("click", function() {
+
+  })
 
   $("#run-search").on("click", function (event) {
+    
     event.preventDefault();
     userInput = $("#city-search").val().trim();
+    $("#city-search").empty();
     updateHistoryList();
     displaySearchHistory();
 
@@ -88,7 +97,7 @@ $(document).ready(function () {
         method: "GET",
       }).then(function (res) {
         var todayWeatherSection = getTodayWeatherSection(
-          userInput,
+          response.name,
           currentDate,
           (imgURL =
             "https://openweathermap.org/img/w/" +
