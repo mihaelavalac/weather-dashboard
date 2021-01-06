@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather</title>
+    <title>Weather Dashboard</title>
     <!-- Bootstrap CSS CDN  -->
     <link rel="stylesheet" href="style.css" />
     <link
@@ -35,7 +35,7 @@
             placeholder="Search city"
           />
 
-          <div  class="input-group-append">
+          <div class="input-group-append">
             <button id="run-search" type="submit" class="btn btn-default">
               <i class="fa fa-search"></i>
             </button>
@@ -47,18 +47,17 @@
           <i class="fa fa-trash"></i> Clear Search History
         </button>
 
-        <hr/>
+        <hr />
 
         <div class="search-history"></div>
       </div>
 
-      <div class="col-md-8" >
-        <div class="d-flex flex-column" id="current-weather">
-          <div class="p-2" >
-          </div>
+      <div class="col-md-9">
+        <div class="d-flex flex-column" id="current-weather"><img>
+          <div class="p-2"></div>
         </div>
-        <div id="five-day" class="row"></div>
-        <div class="p-2"><h1>5 day forecast</h1>
+        <h4 col-12 style='display:block'>Five Day Weather</h4><br>
+        <div  class="row" id="five-day">
         </div>
       </div>
     </div>

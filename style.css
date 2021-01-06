@@ -4,3 +4,9 @@
   text-align: center;
   padding: 20px;
 }
+#fiveDayContainer {
+  color: white;
+  padding: 20px;
+  background-color: rgb(103, 161, 161);
+  margin-right: 20px;
+}
