@@ -1,7 +1,6 @@
 $(document).ready(function () {
   var currentDate = moment().format("M/D/YYYY");
   var userInput;
-  const cityHistoryList = [];
   var weatherApiKey = "fa71042f3bd6f2175c35473b9ffdf2f4";
 
   function getFiveDaysWeather(obj) {
@@ -26,12 +25,8 @@ $(document).ready(function () {
     return sectionContainer;
   }
 
-  function updateHistoryList() {
-    cityHistoryList.push(userInput);
-  }
-
-  function displaySearchHistory() {
-    var listEl = `<li class="list-group-item" id="inputCity"> ${userInput}</li>`  
+  function displaySearchHistory(city) {
+    var listEl = `<li class="list-group-item"> ${city}</li>`  
     $("#search-list").append(listEl);
   }
   // var iconImage = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png");
@@ -61,24 +56,23 @@ $(document).ready(function () {
 
   })
 
-  function allContent () {
+  function displayAllContent (city) {
     $("#city-search").empty();
-    updateHistoryList();
-    displaySearchHistory();
+    $("#current-weather").empty();
+    $("#five-day-weather").empty();
+    //displaySearchHistory();
 
     //Console user input in the browser.
     weatherUrlAPI =
       "http://api.openweathermap.org/data/2.5/weather?q=" +
-      userInput +
+      city +
       "&appid=" +
       weatherApiKey;
     $.ajax({
       url: weatherUrlAPI,
       method: "GET",
     }).then(function (response) {
-      
-      //updateHistoryList(userInput);
-      //displaySearchHistory(cityHistoryList);
+    
 
       let uvAPI =
         "http://api.openweathermap.org/data/2.5/uvi?lat=" +
@@ -92,13 +86,11 @@ $(document).ready(function () {
         url: uvAPI,
         method: "GET",
       }).then(function (res) {
+        displaySearchHistory(city);
         var todayWeatherSection = getTodayWeatherSection(
           response.name,
           currentDate,
-          (imgURL =
-            "https://openweathermap.org/img/w/" +
-            response.weather[0].icon +
-            ".png"),
+          "https://openweathermap.org/img/w/" +response.weather[0].icon +".png",
           (temperature = Math.floor(1.8 * (response.main.temp - 273) + 32)),
           response.main.humidity,
           response.wind.speed,
@@ -107,13 +99,15 @@ $(document).ready(function () {
         );
         $("#current-weather").append(todayWeatherSection);
       });
-    });
-    $("#current-weather").empty();
+    }).catch(function (error){
+      console.log(error)
+      console.log("eroare")
+    })
 
     //The section that display the weather for the next 5 days.
     var fiveDaysForecastAPI =
       "http://api.openweathermap.org/data/2.5/forecast?q=" +
-      userInput +
+      city +
       "&appid=" +
       weatherApiKey;
     $.ajax({
@@ -124,20 +118,19 @@ $(document).ready(function () {
       var displayFiveDayWeather = getFiveDaysWeather(data);
       //iconURL = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png",
       $("#five-day").append(displayFiveDayWeather);
-    });
+    }).catch(function (error){
+      console.log(error);
+    })
   };
 
   $("#run-search").on("click", function (event) {
-    event.preventDefault();
-    userInput = $("#city-search").val().trim();
-    allContent()
-  });
-
-  $("#search-list").on("click", function () {
     //event.preventDefault();
-    newInput = $("#inputCity").innerHtml;
-    allContent(newInput)
-    //window.open("index.html", "_self");
+    userInput = $("#city-search").val().trim();
+    displayAllContent(userInput)
+  });  
+
+  $(".list-group").on("click", function (event) {
+    displayAllContent(event.originalEvent.srcElement.outerText)
   });
 });
 // dateIconURL =
