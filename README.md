@@ -12,3 +12,7 @@ To get the weather conditions the user hav to search for a city or to select one
 When the user click the " Clear Search History " button, the entire content of the screen is deleted.
 
 <img src = "img/empty.png">
+
+The deployment link:
+
+https://mihaelavalac.github.io/weather-dashboard/.
