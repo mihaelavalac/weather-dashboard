@@ -1,11 +1,9 @@
 $(document).ready(function () {
   var currentDate = moment().format("M/D/YYYY");
-  var userInput;
-  localStorage.setItem("city-name", userInput);
   var weatherApiKey = "fa71042f3bd6f2175c35473b9ffdf2f4";
-
   // The function below creates an html block which displays the weather of the picked city for the next 5 days on the screen.
   function getFiveDaysWeather(obj) {
+    //var city = localStorage.getItem("userInput");
     var sectionContainer = " ";
     for (let i = 4, j = 0; i < 40; i = i + 8, j++) {
       console.log();
@@ -27,8 +25,9 @@ $(document).ready(function () {
   }
   //The function below creates an list element for each city.
   function displaySearchHistory(city) {
-    var listEl = `<li class="list-group-item"> ${city}</li>`
-    };
+    var listEl = `<li class="list-group-item"> ${city}</li>`;
+    $("#search-list").append(listEl);
+  }
   // The function below represents the weather for the current day in the chosen city.
   function getTodayWeatherSection(
     cityName,
@@ -92,14 +91,14 @@ $(document).ready(function () {
             response.wind.speed,
             res.value
           );
-          $("#current-weather").append(todayWeatherSection);
-        });
+          $("#current-weather").append(todayWeatherSection);    
+        }); 
       })
       .catch(function (error) {
         console.log(error);
         console.log("eroare");
       });
-
+      
     //The section that display the weather for the next 5 days.
     var fiveDaysForecastAPI =
       "http://api.openweathermap.org/data/2.5/forecast?q=" +
@@ -113,7 +112,6 @@ $(document).ready(function () {
       .then(function (data) {
         $("#five-day").empty();
         var displayFiveDayWeather = getFiveDaysWeather(data);
-        //iconURL = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png",
         $("#five-day").append(displayFiveDayWeather);
       })
       .catch(function (error) {
@@ -184,14 +182,17 @@ $(document).ready(function () {
       .catch(function (error) {
         console.log(error);
       });
+      
   }
 
+ 
   //The search icon reacts on the click event and display the content on the screen.
   $("#run-search").on("click", function (event) {
     userInput = $("#city-search").val().trim();
+    localStorage.setItem("city-name", userInput);
     displayAllContent(userInput);
-    $("input").val("");
-  });
+    $('input').val(''); 
+  });//window.open("index.html", "_self");
 
   // The list text content (city name) reacts on the click event and displays the current weather an the next five days weather.
   $(".list-group").on("click", function (event) {
