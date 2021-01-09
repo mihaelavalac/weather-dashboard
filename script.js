@@ -28,7 +28,7 @@ $(document).ready(function () {
   function displaySearchHistory(city) {
     var listEl = `<li class="list-group-item"> ${city}</li>`  
     $("#search-list").append(listEl);
-  }
+  };
   // var iconImage = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png");
   // iconImage.attr("width", 50);
   function getTodayWeatherSection(
@@ -90,7 +90,7 @@ $(document).ready(function () {
         var todayWeatherSection = getTodayWeatherSection(
           response.name,
           currentDate,
-          "https://openweathermap.org/img/w/" +response.weather[0].icon +".png",
+         "https://openweathermap.org/img/w/" +response.weather[0].icon +".png",
           (temperature = Math.floor(1.8 * (response.main.temp - 273) + 32)),
           response.main.humidity,
           response.wind.speed,
@@ -123,6 +123,74 @@ $(document).ready(function () {
     })
   };
 
+  function displayListContent (city) {
+    $("#city-search").empty();
+    $("#current-weather").empty();
+    $("#five-day-weather").empty();
+    //displaySearchHistory();
+
+    //Console user input in the browser.
+    weatherUrlAPI =
+      "http://api.openweathermap.org/data/2.5/weather?q=" +
+      city +
+      "&appid=" +
+      weatherApiKey;
+    $.ajax({
+      url: weatherUrlAPI,
+      method: "GET",
+    }).then(function (response) {
+    
+
+      let uvAPI =
+        "http://api.openweathermap.org/data/2.5/uvi?lat=" +
+        response.coord.lat +
+        "&lon=" +
+        response.coord.lon +
+        "&appid=" +
+        weatherApiKey;
+
+      return $.ajax({
+        url: uvAPI,
+        method: "GET",
+      }).then(function (res) {
+        var todayWeatherSection = getTodayWeatherSection(
+          response.name,
+          currentDate,
+         "https://openweathermap.org/img/w/" +response.weather[0].icon +".png",
+          (temperature = Math.floor(1.8 * (response.main.temp - 273) + 32)),
+          response.main.humidity,
+          response.wind.speed,
+          res.value
+
+        );
+        $("#current-weather").append(todayWeatherSection);
+      });
+    }).catch(function (error){
+      console.log(error)
+      console.log("eroare")
+    })
+
+    //The section that display the weather for the next 5 days.
+    var fiveDaysForecastAPI =
+      "http://api.openweathermap.org/data/2.5/forecast?q=" +
+      city +
+      "&appid=" +
+      weatherApiKey;
+    $.ajax({
+      url: fiveDaysForecastAPI,
+      method: "GET",
+    }).then(function (data) {
+      $("#five-day").empty();
+      var displayFiveDayWeather = getFiveDaysWeather(data);
+      //iconURL = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png",
+      $("#five-day").append(displayFiveDayWeather);
+    }).catch(function (error){
+      console.log(error);
+    })
+  };
+
+
+
   $("#run-search").on("click", function (event) {
     //event.preventDefault();
     userInput = $("#city-search").val().trim();
@@ -130,7 +198,7 @@ $(document).ready(function () {
   });  
 
   $(".list-group").on("click", function (event) {
-    displayAllContent(event.originalEvent.srcElement.outerText)
+    displayListContent (event.originalEvent.srcElement.outerText)
   });
 });
 // dateIconURL =
