@@ -13,6 +13,13 @@ When the user click the " Clear Search History " button, the entire content of t
 
 <img src = "img/empty.png">
 
-The deployment link:
+# Level of difficulty
+
+The concept of API's is very interesting and alow to use different data to create mor interactive web applications. This was one of the most challenging project for me. 
+
+# The deployment link:
 
 https://mihaelavalac.github.io/weather-dashboard/.
+
+
+

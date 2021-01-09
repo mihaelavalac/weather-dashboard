@@ -58,7 +58,7 @@ $(document).ready(function () {
     $("#current-weather").empty();
     $("#five-day-weather").empty();
     weatherUrlAPI =
-      "http://api.openweathermap.org/data/2.5/weather?q=" +
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
       city +
       "&appid=" +
       weatherApiKey;
@@ -68,7 +68,7 @@ $(document).ready(function () {
     })
       .then(function (response) {
         let uvAPI =
-          "http://api.openweathermap.org/data/2.5/uvi?lat=" +
+          "https://api.openweathermap.org/data/2.5/uvi?lat=" +
           response.coord.lat +
           "&lon=" +
           response.coord.lon +
@@ -101,7 +101,7 @@ $(document).ready(function () {
       
     //The section that display the weather for the next 5 days.
     var fiveDaysForecastAPI =
-      "http://api.openweathermap.org/data/2.5/forecast?q=" +
+      "https://api.openweathermap.org/data/2.5/forecast?q=" +
       city +
       "&appid=" +
       weatherApiKey;
@@ -124,7 +124,7 @@ $(document).ready(function () {
     $("#current-weather").empty();
     $("#five-day-weather").empty();
     weatherUrlAPI =
-      "http://api.openweathermap.org/data/2.5/weather?q=" +
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
       city +
       "&appid=" +
       weatherApiKey;
@@ -134,7 +134,7 @@ $(document).ready(function () {
     })
       .then(function (response) {
         let uvAPI =
-          "http://api.openweathermap.org/data/2.5/uvi?lat=" +
+          "https://api.openweathermap.org/data/2.5/uvi?lat=" +
           response.coord.lat +
           "&lon=" +
           response.coord.lon +
@@ -166,7 +166,7 @@ $(document).ready(function () {
 
     //The section that display the weather for the next 5 days.
     var fiveDaysForecastAPI =
-      "http://api.openweathermap.org/data/2.5/forecast?q=" +
+      "https://api.openweathermap.org/data/2.5/forecast?q=" +
       city +
       "&appid=" +
       weatherApiKey;
