@@ -17,3 +17,10 @@
 #city-search {
   text-transform: capitalize;
 }
+#clear-all {
+  padding-left: 20px;
+  background-color: white;
+} 
+#search-section, #search-list {
+  padding-left: 20px;
+}
