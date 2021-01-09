@@ -189,7 +189,6 @@ $(document).ready(function () {
   //The search icon reacts on the click event and display the content on the screen.
   $("#run-search").on("click", function (event) {
     userInput = $("#city-search").val().trim();
-    localStorage.setItem("city-name", userInput);
     displayAllContent(userInput);
     $('input').val(''); 
   });//window.open("index.html", "_self");
