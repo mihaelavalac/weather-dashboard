@@ -41,7 +41,7 @@ $(document).ready(function () {
     return `<h1 id="current-city">${cityName} ( ${todayDate} ) <img id = "imgIcon" src ="${imgURL}"> </h1>  
 <p id="temperature">Temperature: ${cityTemp} F </p>
 <p id="humidity">Humidity: ${cityHumid}</p>
-<p id="wind-speed">Wind Speed:${cityWindSpeed} </p>
+<p id="wind-speed">Wind Speed: ${cityWindSpeed} </p>
 <p id="uv-index">UV Index: ${cityUV}</p>
 <h4 id="five-day-weather" col-12 style='display:block'>Five Day Weather</h4><br>`;
   }
