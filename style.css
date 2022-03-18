@@ -1,5 +1,5 @@
 .title {
-  background-color: rgb(103, 161, 161);
+  background-color: rgb(34, 155, 215);
   color: white ;
   text-align: center;
   padding: 20px;
@@ -7,7 +7,7 @@
 #fiveDayContainer {
   color: white;
   padding: 20px;
-  background-color: rgb(103, 161, 161);
+  background-color: rgb(34, 155, 215);
   margin-right: 20px;
 }
 #imgIcon {

@@ -52,7 +52,7 @@ $(document).ready(function () {
     $("#page-content").empty();
   });
 
-  // This function displays all the content of the introduced city on the screen(add the city to the list, diplays the weather for current day and below the weather for the next five days).
+  // This function displays all the content of the introduced city on the screen(add the city to the list, displays the weather for current day and below the weather for the next five days).
   function displayAllContent(city) {
     $("#city-search").empty();
     $("#current-weather").empty();
