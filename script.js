@@ -15,7 +15,7 @@ $(document).ready(function () {
         ".png";
       tempForecast = Math.floor(1.8 * (obj.list[i].main.temp - 273) + 32);
       let section = `<div  class='cell medium-4 large-2'>
-    <div id = 'fiveDayContainer'> <h5 id="current-city">  ${date}  </h5>
+    <div id = 'fiveDayContainer'> <p class="h5 m-1" id="current-city">  ${date}  </p>
     <img id = "icon" src ="${iconURL}"> 
     <p id="temperature"> Temp: ${tempForecast} F </p>
     <p id="humidity"> Humidity: ${obj.list[i].main.humidity} % </p></div></div>`;
@@ -38,12 +38,12 @@ $(document).ready(function () {
     cityWindSpeed,
     cityUV
   ) {
-    return `<h1 id="current-city">${cityName} ( ${todayDate} ) <img id = "imgIcon" src ="${imgURL}"> </h1>  
+    return `<p class="h2 p-2" id="current-city">${cityName} ( ${todayDate} ) <img id = "imgIcon" src ="${imgURL}"> </p>  
 <p id="temperature">Temperature: ${cityTemp} F </p>
 <p id="humidity">Humidity: ${cityHumid}</p>
 <p id="wind-speed">Wind Speed: ${cityWindSpeed} </p>
 <p id="uv-index">UV Index: ${cityUV}</p>
-<h4 id="five-day-weather" col-12 style='display:block'>Five Day Weather</h4><br>`;
+<p id="five-day-weather" class="col-12 h4" >Five Days Weather</p><br>`;
   }
 
   // The Clear Search History button react on the click event and deletes all the cities of the list.
@@ -52,7 +52,7 @@ $(document).ready(function () {
     $("#page-content").empty();
   });
 
-  // This function displays all the content of the introduced city on the screen(add the city to the list, diplays the weather for current day and below the weather for the next five days).
+  // This function displays all the content of the introduced city on the screen(add the city to the list, displays the weather for current day and below the weather for the next five days).
   function displayAllContent(city) {
     $("#city-search").empty();
     $("#current-weather").empty();
